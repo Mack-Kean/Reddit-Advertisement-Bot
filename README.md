@@ -10,3 +10,5 @@ a `subreddits` property which contains an array of subreddits you would like the
 ### Warning:
 According to the [reddit API Github wiki](https://github.com/reddit-archive/reddit/wiki/API) there is a limit of 60 OAuth requests per minute.  Thus,  more than 60 subreddits being added to the `subreddits` json could result in unexpected behaviour.  This has not yet been tested.
 
+Small typos and errors within the config.json file are almost guarenteed to break the program.  If you encounter errors this is the first place to check
+

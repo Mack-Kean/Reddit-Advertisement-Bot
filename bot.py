@@ -38,15 +38,10 @@ if (data['image_filename'] != ""):
     selftext = '{image1}'
     media = {"image1": image}
 
-
-#put together the contents of the post
-selftext += neatSummaryText \
-+ '\n\n# Find us here: \n\n' \
-+ '### **Anchor.fm:** https://anchor.fm/manswithopinions/episodes/Mans-With-Opinions-V2-3-e1e11lj \n\n' \
-+ '### **Spotify:** https://open.spotify.com/show/2QttwoLNUprOBZaazsJJ7U \n\n' \
-+ '### **Google Podcasts:** https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy84MjQxNWU3NC9wb2RjYXN0L3Jzcw \n\n' \
-+ '### **Apple Podcasts:** https://podcasts.apple.com/us/podcast/mans-with-opinions/id1608806064 \n\n' \
-+ '### **Youtube:** https://www.youtube.com/watch?v=MB0f4uR-yZ4&t=16s \n\n'
+#this loop adds all platforms from config file
+selftext += neatSummaryText + '\n\n# Find us here: \n\n'
+for platform in data['platforms']:
+    selftext += '### ' + platform['name'] + ': ' + platform['link'] + '\n\n'
 
 #this is where the magic happens
 for sub in data['subreddits']:
