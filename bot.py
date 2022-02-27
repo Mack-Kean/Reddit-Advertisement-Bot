@@ -1,5 +1,5 @@
 import praw
-from praw.models import InlineGif, InlineImage, InlineVideo
+from praw.models import InlineImage
 import feedparser
 import json
 
@@ -18,9 +18,10 @@ reddit = praw.Reddit(
     password=data['password']
 )
 
+#this supresses praw warnings
 reddit.validate_on_submit = True
 
-RSSfeed = feedparser.parse('https://anchor.fm/s/82415e74/podcast/rss')
+RSSfeed = feedparser.parse(data['rss_feed'])
 newestEpisode = RSSfeed.entries[0] #this will always be the most recent entry in the feed
 
 # the next 4 lines take away the html tags (will eventually be changed to anything between <>)
@@ -30,7 +31,7 @@ neatSummaryText = neatSummaryText.replace('</p>', '')
 neatSummaryText = neatSummaryText.replace('<br />', '')
 
 #put together the contents of the post
-image = InlineImage('LOGO-04new.jpg', '')
+image = InlineImage(data['image_filename'], data['image_caption'])
 selftext =  '{image1}' \
 + neatSummaryText \
 + '\n\n# Find us here: \n\n' \
@@ -44,4 +45,4 @@ media = {"image1": image}
 
 #this is where the magic happens
 for sub in data['subreddits']:
-    reddit.subreddit('test').submit(newestEpisode.title, selftext=selftext, inline_media=media)
+    reddit.subreddit(sub).submit(newestEpisode.title, selftext=selftext, inline_media=media)
