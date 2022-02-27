@@ -41,7 +41,7 @@ if (data['image_filename'] != ""):
 #this loop adds all platforms from config file
 selftext += neatSummaryText + '\n\n# Find us here: \n\n'
 for platform in data['platforms']:
-    selftext += '### ' + platform['name'] + ': ' + platform['link'] + '\n\n'
+    selftext += '### [' + platform['name'] + '](' + platform['link'] + ')\n\n'
 
 #this is where the magic happens
 for sub in data['subreddits']:
