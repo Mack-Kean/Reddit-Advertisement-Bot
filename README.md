@@ -3,7 +3,7 @@ A bot designed to advertise a podcast on multiple subreddits.  Can be tweaked fo
 ---
 
 ## Usage:
-This bot requires a JSON file named 'data.json' to run.  The file must specify
+This bot requires a JSON file named 'config.json' to run.  The file must specify
 `client_id`, `client_secret_key`, `user_agent`, `password`, and `username` properties in addition to
 a `subreddits` property which contains an array of subreddits you would like the bot to post in.
 

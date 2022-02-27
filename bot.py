@@ -6,8 +6,8 @@ import json
 CLIENT_ID = 'pm25UeetuPduMhmHDgfocQ'
 SECRET_KEY = '-kHk4dAxWCAkfrbpM1Mz8EZ1qlZRBw'
 
-# auth = requests.auth.HTTPBasicAuth(CLIENT_ID, SECRET_KEY)
-f = open('data.json')
+#open json confif file
+f = open('config.json')
 data = json.load(f)
 
 reddit = praw.Reddit(
