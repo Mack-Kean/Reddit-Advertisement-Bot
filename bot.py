@@ -30,18 +30,23 @@ neatSummaryText = neatSummaryText.replace('<p>', '')
 neatSummaryText = neatSummaryText.replace('</p>', '')
 neatSummaryText = neatSummaryText.replace('<br />', '')
 
+media = {}
+selftext = ''
+#check to see if an image is included
+if (data['image_filename'] != ""):
+    image = InlineImage(data['image_filename'], data['image_caption'])
+    selftext = '{image1}'
+    media = {"image1": image}
+
+
 #put together the contents of the post
-image = InlineImage(data['image_filename'], data['image_caption'])
-selftext =  '{image1}' \
-+ neatSummaryText \
+selftext += neatSummaryText \
 + '\n\n# Find us here: \n\n' \
 + '### **Anchor.fm:** https://anchor.fm/manswithopinions/episodes/Mans-With-Opinions-V2-3-e1e11lj \n\n' \
 + '### **Spotify:** https://open.spotify.com/show/2QttwoLNUprOBZaazsJJ7U \n\n' \
 + '### **Google Podcasts:** https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy84MjQxNWU3NC9wb2RjYXN0L3Jzcw \n\n' \
 + '### **Apple Podcasts:** https://podcasts.apple.com/us/podcast/mans-with-opinions/id1608806064 \n\n' \
 + '### **Youtube:** https://www.youtube.com/watch?v=MB0f4uR-yZ4&t=16s \n\n'
-
-media = {"image1": image}
 
 #this is where the magic happens
 for sub in data['subreddits']:
