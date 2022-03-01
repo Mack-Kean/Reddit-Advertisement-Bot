@@ -1,7 +1,8 @@
-import praw
-from praw.models import InlineImage
-import feedparser
-import json
+import praw #this lets us talk to the reddit API
+from praw.models import InlineImage #easiest way to add image to our post
+import feedparser #allows us to get rss feed data
+import json #allows us to put json configuration data into a dictionary
+import sys #lets us get command line arguments
 
 CLIENT_ID = 'pm25UeetuPduMhmHDgfocQ'
 SECRET_KEY = '-kHk4dAxWCAkfrbpM1Mz8EZ1qlZRBw'
@@ -29,6 +30,8 @@ reddit.validate_on_submit = True
 RSSfeed = feedparser.parse(data['rss_feed'])
 newestEpisode = RSSfeed.entries[0] #this will always be the most recent entry in the feed
 
+print(newestEpisode.keys())
+
 # the next 4 lines take away the html tags (will eventually be changed to anything between <>)
 neatSummaryText = newestEpisode.summary
 neatSummaryText = neatSummaryText.replace('<p>', '')
@@ -48,6 +51,11 @@ selftext += neatSummaryText + '\n\n# Find us here: \n\n'
 for platform in data['platforms']:
     selftext += '### [' + platform['name'] + '](' + platform['link'] + ')\n\n'
 
-#this is where the magic happens
-for sub in data['subreddits']:
-    reddit.subreddit(sub).submit(newestEpisode.title, selftext=selftext, inline_media=media)
+#if statement allows you to add a testing flag so the bot doesnt actually try to post on reddit
+if (len(sys.argv) == 1 or (len(sys.argv) > 1 and sys.argv[1] != 't')):
+    #this is where the magic happens
+    for sub in data['subreddits']:
+        reddit.subreddit(sub).submit(newestEpisode.title, selftext=selftext, inline_media=media)
+
+
+
