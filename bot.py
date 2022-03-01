@@ -30,7 +30,13 @@ reddit.validate_on_submit = True
 RSSfeed = feedparser.parse(data['rss_feed'])
 newestEpisode = RSSfeed.entries[0] #this will always be the most recent entry in the feed
 
-print(newestEpisode.keys())
+# print(newestEpisode.keys())
+# print('\nPUBLISHED: ' + newestEpisode.published)
+# testVar = newestEpisode.published_parsed
+# print(testVar)
+# print(testVar.tm_year)
+
+#check the time that the last episode was added to the rss feed
 
 # the next 4 lines take away the html tags (will eventually be changed to anything between <>)
 neatSummaryText = newestEpisode.summary
