@@ -3,9 +3,7 @@ from praw.models import InlineImage #easiest way to add image to our post
 import feedparser #allows us to get rss feed data
 import json #allows us to put json configuration data into a dictionary
 import sys #lets us get command line arguments
-
-CLIENT_ID = 'pm25UeetuPduMhmHDgfocQ'
-SECRET_KEY = '-kHk4dAxWCAkfrbpM1Mz8EZ1qlZRBw'
+import time # lets us run the script every week but only post if a new episode is added to the rss feed
 
 #open json confif file if possible
 try:
@@ -30,13 +28,9 @@ reddit.validate_on_submit = True
 RSSfeed = feedparser.parse(data['rss_feed'])
 newestEpisode = RSSfeed.entries[0] #this will always be the most recent entry in the feed
 
-# print(newestEpisode.keys())
-# print('\nPUBLISHED: ' + newestEpisode.published)
-# testVar = newestEpisode.published_parsed
-# print(testVar)
-# print(testVar.tm_year)
-
 #check the time that the last episode was added to the rss feed
+timeStruct = newestEpisode.published_parsed
+print(timeStruct)
 
 # the next 4 lines take away the html tags (will eventually be changed to anything between <>)
 neatSummaryText = newestEpisode.summary
