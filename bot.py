@@ -49,6 +49,8 @@ if (timeTuple.tm_yday >= currentTime.tm_yday - 7 or timeTuple.tm_year > currentT
 
     #this loop adds all platforms from config file and uses markdown to make them look nice
     selftext += neatSummaryText + '\n\n# Find us here: \n\n'
+    #anchor.fm link is updated in the rss feed and thus cannot be given through config file
+    selftext += '### [Anchor.fm](' + newestEpisode.link + ')\n\n'
     for platform in data['platforms']:
         selftext += '### [' + platform['name'] + '](' + platform['link'] + ')\n\n'
 
